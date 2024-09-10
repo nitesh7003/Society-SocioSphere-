@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null; // This line ensures no layout is applied
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Society Notebook</title>
+</head>
+<body>
+    <div class="background-slider">
+        <img src="/Content/Images/view-city-with-apartment-buildings-green-vegetation.jpg" alt="Background 1" class="bg-slide active" />
+       @*  <img src="/Content/Images/20240824_190015.jpg" alt="Background 2" class="bg-slide" /> *@
+       
+    </div>
+    <div class="login-container">
+        <div class="image-container">
+            <div class="slider">
+                <img src="/Content/Images/girl2.a343d661d8452a7d48c3.png" alt="Woman walking with phone and shopping bags" class="slide active" />
+                <img src="/Content/Images/girl2.a343d661d8452a7d48c3.png" alt="Another image description" class="slide" />
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Sign In</h2>
+            <form asp-action="Login" method="post">
+                <div class="form-group">
+                    <label for="emailOrname">Username Or Email </label>
+                    <input id="emailOrname" name="emailOrname" class="form-control" type="tel" placeholder="Enter Email or Username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" class="form-control" type="password" placeholder="Enter Password" />
+                </div>
+                <div class="form-group">
+                    <button type="submit">Sign In</button>
+                </div>
+                <div class="error">
+                    @ViewBag.Error
+                </div>
+            </form>
+        </div>
+    </div>
+   @*  <div class="copyright">
+        Copyright -
+    </div> *@
+</body>
+</html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.slide');
+    const bgSlides = document.querySelectorAll('.bg-slide');
+    let currentSlide = 0;
+    let currentBgSlide = 0;
+
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+
+    function nextBgSlide() {
+        bgSlides[currentBgSlide].classList.remove('active');
+        currentBgSlide = (currentBgSlide + 1) % bgSlides.length;
+        bgSlides[currentBgSlide].classList.add('active');
+    }
+
+    setInterval(nextSlide, 4000); // Change login form slide every 3 seconds
+    setInterval(nextBgSlide, 5000); // Change background slide every 5 seconds
+});
+
+</script>

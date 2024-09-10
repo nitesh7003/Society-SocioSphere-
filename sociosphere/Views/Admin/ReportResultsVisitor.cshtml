@@ -1,0 +1,155 @@
+﻿@model IEnumerable<sociosphere.Models.gatemanagement>
+@{
+    ViewData["Title"] = "Report Results - Visitors";
+}
+
+<div class="visitor-report-container">
+    <h2 class="visitor-report-title"><i class="fas fa-users visitor-report-icon"></i>Visitor Report Results</h2>
+    <form asp-action="ExportReportToCSV" method="post" class="visitor-report-export-form">
+        <input type="hidden" name="reportType" value="Visitor" />
+        <button type="submit" class="visitor-report-export-btn">
+            <i class="fas fa-file-csv visitor-report-icon"></i>Export to CSV
+        </button>
+    </form>
+    <div class="visitor-report-table-container">
+        <table class="visitor-report-table">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-user visitor-report-icon"></i>Visitor Name</th>
+                    <th><i class="fas fa-home visitor-report-icon"></i>Flat Number</th>
+                    <th><i class="fas fa-building visitor-report-icon"></i>Wing Name</th>
+                    <th><i class="fas fa-phone visitor-report-icon"></i>Phone</th>
+                    <th><i class="fas fa-sign-in-alt visitor-report-icon"></i>In DateTime</th>
+                    <th><i class="fas fa-sign-out-alt visitor-report-icon"></i>Out DateTime</th>
+                    <th><i class="fas fa-info-circle visitor-report-icon"></i>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var visitor in Model)
+                {
+                    <tr>
+                        <td>@visitor.VisitorName</td>
+                        <td>@visitor.FlatNo</td>
+                        <td>@visitor.WingName</td>
+                        <td>@visitor.Phone</td>
+                        <td>@visitor.InDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@(visitor.OutDateTime?.ToString("dd-MM-yyyy HH:mm") ?? "-")</td>
+                        <td>
+                            <span class="visitor-report-status @(visitor.Status.ToLower() == "in" ? "in" : "out")">
+                                @visitor.Status
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .visitor-report-container {
+        font-family: 'Roboto', sans-serif;
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .visitor-report-title {
+        font-family: 'Playfair Display', serif;
+        color: #1a1a1a;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .visitor-report-export-form {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .visitor-report-export-btn {
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .visitor-report-export-btn:hover {
+        background-color: #357abd;
+    }
+
+    .visitor-report-table-container {
+        overflow-x: auto;
+    }
+
+    .visitor-report-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .visitor-report-table th,
+    .visitor-report-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .visitor-report-table th {
+        background-color: #f5f5f5;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        letter-spacing: 0.5px;
+    }
+
+    .visitor-report-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .visitor-report-table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .visitor-report-icon {
+        margin-right: 8px;
+        color: #4a90e2;
+    }
+
+    .visitor-report-status {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: 500;
+    }
+
+    .visitor-report-status.in {
+        background-color: #e6f7ed;
+        color: #28a745;
+    }
+
+    .visitor-report-status.out {
+        background-color: #fbe9e7;
+        color: #dc3545;
+    }
+
+    media (max-width: 768px) {
+        .visitor-report-table {
+            font-size: 14px;
+        }
+
+        .visitor-report-table th,
+        .visitor-report-table td {
+            padding: 10px;
+        }
+    }
+</style>

@@ -1,0 +1,166 @@
+﻿@model sociosphere.Models.AnnouncementViewModel
+
+<!-- Add Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="announcement-container">
+    <div class="announcement-header">
+        <i class="fas fa-bullhorn company-logo"></i>
+        <h2 class="announcement-title">Create New Announcement</h2>
+    </div>
+    <div class="announcement-content">
+        <div class="vector-image">
+            <img src="https://cdn.pixabay.com/photo/2016/10/10/14/44/train-1728537_1280.jpg" alt="Announcement Illustration" class="illustration">
+        </div>
+        <form asp-action="AddAnnouncement" method="post" class="announcement-form">
+            <div class="form-group">
+                <label asp-for="Announcement" class="control-label">Announcement</label>
+                <textarea asp-for="Announcement" class="form-control announcement-textarea" placeholder="Enter your announcement here..."></textarea>
+                <span asp-validation-for="Announcement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary announcement-submit">
+                    <i class="fas fa-plus-circle"></i> Add Announcement
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="announcement-footer">
+        <a class="nav-link announcement-view-link" asp-area="" asp-controller="Admin" asp-action="ViewAnnouncements">
+            <i class="fas fa-eye"></i> View Announcements
+        </a>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f0f4f8;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .announcement-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .announcement-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .company-logo {
+        font-size: 2.5rem;
+        color: #3498db;
+        margin-right: 1rem;
+    }
+
+    .announcement-title {
+        color: #2c3e50;
+        font-size: 2.5rem;
+        margin: 0;
+        flex-grow: 1;
+        text-align: center;
+        font-weight: 300;
+    }
+
+    .announcement-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .vector-image {
+        flex-shrink: 0;
+        width: 40%;
+    }
+
+    .illustration {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .announcement-form {
+        flex-grow: 1;
+        background-color: #f8f9fa;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .control-label {
+        font-weight: 600;
+        color: #34495e;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .announcement-textarea {
+        min-height: 150px;
+        resize: vertical;
+        border: 1px solid #bdc3c7;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+        .announcement-textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+        }
+
+    .announcement-submit {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background-color: #3498db;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .announcement-submit:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+    .announcement-footer {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .announcement-view-link {
+        display: inline-flex;
+        align-items: center;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .announcement-view-link:hover {
+            color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+    .text-danger {
+        color: #e74c3c;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+
+    .fas {
+        margin-right: 0.5rem;
+    }
+</style>

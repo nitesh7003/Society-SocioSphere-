@@ -1,0 +1,195 @@
+﻿@model sociosphere.Models.alloteflat
+
+<div class="allot-flat-container">
+    <h2><i class="fas fa-home"></i> Allot Flat</h2>
+    <form asp-action="AlloteFlat" method="post" class="allot-flat-form">
+        <div class="form-group">
+            <label asp-for="name"><i class="fas fa-user"></i> Name</label>
+            <select asp-for="name" class="form-control" asp-items="ViewBag.UserNames">
+                <option value="">Select name</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="wingname"><i class="fas fa-building"></i> Wing Name</label>
+            <select asp-for="wingname" class="form-control" asp-items="ViewBag.WingNames" id="wingNameDropdown">
+                <option value="">Select wing name</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="floorno"><i class="fas fa-layer-group"></i> Floor Number</label>
+            <select asp-for="floorno" class="form-control" id="floorNoDropdown">
+                <option value="">Select Floor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="flatno"><i class="fas fa-door-closed"></i> Flat Number</label>
+            <select asp-for="flatno" class="form-control" id="flatNoDropdown">
+                <option value="">Select Flat Number</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="flattype"><i class="fas fa-home"></i> Flat Type</label>
+            <input asp-for="flattype" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="moveindate"><i class="fas fa-calendar-alt"></i> Move-in Date</label>
+            <input asp-for="moveindate" class="form-control" type="date" />
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Allot Flat</button>
+    </form>
+</div>
+<div class="text-center mt-4">
+    <a asp-action="GetAlloteFlat" class="btn btn-success">
+        <i class="fas fa-list"></i> View all alloted flats
+    </a>
+</div>
+<style>
+    
+   
+    <!-- Add Font Awesome CSS link in the head of your layout or at the top of this view -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" >
+
+    body {
+        background-color: #f4f7f6;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .allot-flat-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .allot-flat-container h2 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+
+    .allot-flat-form .form-group {
+        margin-bottom: 25px;
+    }
+
+    .allot-flat-form label {
+        display: block;
+        margin-bottom: 8px;
+        color: #34495e;
+        font-weight: 500;
+    }
+
+    .allot-flat-form .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #bdc3c7;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .allot-flat-form .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+    }
+
+    .allot-flat-form .btn-primary {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #3498db;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .allot-flat-form .btn-primary:hover {
+        background-color: #2980b9;
+    }
+
+    .fas {
+        margin-right: 8px;
+        color: #3498db;
+    }
+</style>
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            $('#wingNameDropdown').change(function () {
+                var wingName = $(this).val();
+                if (wingName) {
+                    loadFloorNumbers(wingName);
+                } else {
+                    resetDropdowns(['#floorNoDropdown', '#flatNoDropdown']);
+                    $('#flattype').val(''); // Clear Flat Type
+                }
+            });
+
+            $('#floorNoDropdown').change(function () {
+                var wingName = $('#wingNameDropdown').val();
+                var floorNo = $(this).val();
+                if (floorNo) {
+                    loadFlatNumbers(wingName, floorNo);
+                } else {
+                    resetDropdowns(['#flatNoDropdown']);
+                    $('#flattype').val(''); // Clear Flat Type
+                }
+            });
+
+            $('#flatNoDropdown').change(function () {
+                var selectedFlatNo = $(this).val();
+                if (selectedFlatNo) {
+                    var flatType = $(this).find(':selected').data('flattype');
+                    $('#flattype').val(flatType);
+                } else {
+                    $('#flattype').val(''); // Clear Flat Type
+                }
+            });
+
+            function loadFloorNumbers(wingName) {
+                $.getJSON('/Admin/GetFloorNumbers', { wingName: wingName }, function (data) {
+                    var dropdown = $('#floorNoDropdown');
+                    dropdown.empty();
+                    dropdown.append('<option value="">Select Floor</option>');
+                    $.each(data, function (index, item) {
+                        dropdown.append($('<option></option>').val(item).text(item));
+                    });
+                });
+            }
+
+            function loadFlatNumbers(wingName, floorNo) {
+                $.getJSON('/Admin/GetFlatNumbers', { wingName: wingName, floorNo: floorNo }, function (data) {
+                    var dropdown = $('#flatNoDropdown');
+                    dropdown.empty();
+                    dropdown.append('<option value="">Select Flat Number</option>');
+                    $.each(data, function (index, item) {
+                        dropdown.append(
+                            $('<option></option>')
+                                .val(item.flatno)
+                                .text(item.flatno)
+                                .data('flattype', item.flattype) // Store flat type data
+                        );
+                    });
+                });
+            }
+
+            function resetDropdowns(dropdownIds) {
+                dropdownIds.forEach(function (dropdownId) {
+                    var dropdown = $(dropdownId);
+                    dropdown.empty();
+                    dropdown.append('<option value="">Select</option>');
+                });
+            }
+        });
+
+
+    </script>
+}

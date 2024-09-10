@@ -1,0 +1,472 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>SocioSphere -</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/assets/img/a1.png">
+
+	<!-- Fontfamily -->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&amp;display=swap" rel="stylesheet">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+	<!-- Feathericon CSS -->
+	<link rel="stylesheet" href="/assets/plugins/feather/feather.css">
+
+	<!-- Pe7 CSS -->
+	<link rel="stylesheet" href="/assets/plugins/icons/flags/flags.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<!-- Header -->
+		<div class="header">
+
+			<!-- Logo -->
+			<div class="header-left">
+				<a href="@Url.Action("Dashboard", "Admin")" class="logo">
+					<img src="/assets/img/a3.png" alt="Logo">
+				</a>
+				<a href="@Url.Action("Dashboard", "Admin")" class="logo logo-small">
+					<img src="/assets/img/a2.png" alt="Logo" width="30" height="30">
+				</a>
+			</div>
+			<!-- /Logo -->
+
+			<div class="menu-toggle">
+				<a href="javascript:void(0);" id="toggle_btn">
+					<i class="fas fa-bars"></i>
+				</a>
+			</div>
+
+			<!-- Search Bar -->
+			<div class="top-nav-search">
+				<form>
+					<input type="text" class="form-control" placeholder="Search here">
+					<button class="btn" type="submit"><i class="fas fa-search"></i></button>
+				</form>
+			</div>
+			<!-- /Search Bar -->
+			<!-- Mobile Menu Toggle -->
+			<a class="mobile_btn" id="mobile_btn">
+				<i class="fas fa-bars"></i>
+			</a>
+			<!-- /Mobile Menu Toggle -->
+			<!-- Header Right Menu -->
+			<ul class="nav user-menu">
+				@* <li class="nav-item dropdown noti-dropdown language-drop me-2">
+					<a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
+						<img src="/assets/img/icons/header-icon-01.svg" alt="">
+					</a>
+					<div class="dropdown-menu ">
+						<div class="noti-content">
+							<div>
+								<a class="dropdown-item" href="javascript:;"><i class="flag flag-lr me-2"></i>English</a>
+								<a class="dropdown-item" href="javascript:;"><i class="flag flag-bl me-2"></i>Francais</a>
+								<a class="dropdown-item" href="javascript:;"><i class="flag flag-cn me-2"></i>Turkce</a>
+							</div>
+						</div>
+					</div>
+				</li> *@
+				<!-- Notifications 1 -->
+				 @if (Context.Session.GetString("Role") == "Admin")
+
+				{
+
+					<li class="nav-item dropdown noti-dropdown me-2">
+						<a href="#" class="dropdown-toggle nav-link header-nav-list" id="adminNotificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="/assets/img/icons/header-icon-05.svg" alt="">
+							<span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" id="adminNotificationCount"></span>
+						</a>
+						<div class="dropdown-menu notifications">
+							<div class="topnav-dropdown-header">
+								<span class="notification-title">Notifications</span>
+								<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+							</div>
+							<div class="noti-content">
+
+								<ul class="notification-scroll" id="adminNotificationContainer">
+
+									<!-- Notifications will be loaded here dynamically -->
+								</ul>
+							</div>
+							<div class="topnav-dropdown-footer">
+								<a href="#">View all Notifications</a>
+							</div>
+						</div>
+					</li>
+					<!-- /Notifications 1 -->
+				}
+				else
+						@if (Context.Session.GetString("Role") == "User")
+				{
+					<!-- Notifications 2 -->
+
+
+					<li class="nav-item dropdown noti-dropdown me-2">
+						<a href="#" class="dropdown-toggle nav-link header-nav-list" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="/assets/img/icons/header-icon-05.svg" alt="">
+							<span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" id="notificationCount"></span>
+						</a>
+						<div class="dropdown-menu notifications">
+							<div class="topnav-dropdown-header">
+								<span class="notification-title">Notifications</span>
+								<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+							</div>
+							<div class="noti-content">
+
+								<ul class="notification-scroll" div id="notificationContainer">
+
+									<!-- Notifications will be loaded here dynamically -->
+								</ul>
+							</div>
+							<div class="topnav-dropdown-footer">
+								<a href="#">View all Notifications</a>
+							</div>
+						</div>
+					</li>
+				}
+				<!-- /Notifications 2 -->
+				<li class="nav-item zoom-screen me-2">
+					<a href="#" class="nav-link header-nav-list win-maximize">
+						<img src="/assets/img/icons/header-icon-04.svg" alt="">
+					</a>
+				</li>
+				@if (Context.Session.GetString("Role") == "Admin")
+				{
+				<!-- User Menu1 -->
+				<li class="nav-item dropdown has-arrow new-user-menus">
+					<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+						<div class="user-img">
+							<img class="rounded-circle" src="/@Context.Session.GetString("PHOTO")" width="31" alt="@Context.Session.GetString("name")">
+							<div class="user-text">
+								<h6>@Context.Session.GetString("name")</h6>
+								<p class="text-muted mb-0">Administrator</p>
+							</div>
+						</div>
+					</a>
+					<div class="dropdown-menu">
+						<div class="user-header">
+							<div class="avatar avatar-sm">
+								<img src="/@Context.Session.GetString("PHOTO")" alt="User Image" class="avatar-img rounded-circle">
+							</div>
+							<div class="user-text">
+								<h6>@Context.Session.GetString("name")"</h6>
+								<p class="text-muted mb-0">Administrator</p>
+							</div>
+						</div>
+							<a class="dropdown-item" href="@Url.Action("ProfileEdit", "userreg")">My Profile</a>
+						
+						<a class="dropdown-item" href="@Url.Action("Logout", "userreg")">Logout</a>
+					</div>
+				</li>
+				<!-- /User Menu1 -->
+				}
+				else @if (Context.Session.GetString("Role") == "User") {
+				<!-- User Menu2 -->
+				<li class="nav-item dropdown has-arrow new-user-menus">
+					<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+						<div class="user-img">
+							<img class="rounded-circle" src="/@Context.Session.GetString("PHOTO")" width="31" alt="@Context.Session.GetString("name")">
+							<div class="user-text">
+								<h6>@Context.Session.GetString("name")</h6>
+								<p class="text-muted mb-0">User</p>
+							</div>
+						</div>
+					</a>
+					<div class="dropdown-menu">
+						<div class="user-header">
+							<div class="avatar avatar-sm">
+								<img src="/@Context.Session.GetString("PHOTO")" alt="User Image" class="avatar-img rounded-circle">
+							</div>
+							<div class="user-text">
+								<h6>@Context.Session.GetString("name")"</h6>
+								<p class="text-muted mb-0">User</p>
+							</div>
+						</div>
+						<a class="dropdown-item" href="@Url.Action("ProfileEdit", "userreg")">My Profile</a>
+						
+						<a class="dropdown-item" href="@Url.Action("Logout", "userreg")">Logout</a>
+					</div>
+				</li>
+				<!-- /User Menu2 -->
+				}
+			</ul>
+			<!-- /Header Right Menu -->
+
+		</div>
+		<!-- /Header -->
+		
+                     @if (Context.Session.GetString("Role") == "Admin")
+
+		{
+			<!-- Sidebar1 -->
+			<div class="sidebar" id="sidebar">
+				<div class="sidebar-inner slimscroll">
+					<div id="sidebar-menu" class="sidebar-menu">
+						<ul>
+							<li class="menu-title">
+								<span>Main Menu</span>
+							</li>
+							<li class="submenu active">
+								<a href="#"><i class="fas fa-tachometer-alt"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("Dashboard", "Admin")" class="active">Admin Dashboard</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Bill Management</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("AddBill", "Admin")">Add Bill</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="#"><i class="fas fa-building"></i> <span>Flat Management</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("AddFlat", "Admin")">AddFlat</a></li>
+									<li><a href="@Url.Action("GetAllFlat", "Admin")">View Added Flats</a></li>
+									<li><a href="@Url.Action("AlloteFlat", "Admin")">AlloteFlat</a></li>
+									<li><a href="@Url.Action("GetAlloteFlat", "Admin")">View AllotedFlat</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="#"><i class="fas fa-users"></i> <span>Flat Owner <br /> Management</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("Register", "userreg")">Add Flat Owner</a></li>
+									<li><a href="@Url.Action("GetAllUsers", "userreg")">View Flat Owner</a></li>
+									<li><a href="@Url.Action("AlloteFlat", "Admin")">AlloteFlat</a></li>
+									<li><a href="@Url.Action("GetAlloteFlat", "Admin")">View AllotedFlat</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="#"><i class="fas fa-exclamation-circle"></i> <span> Complaint</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("ViewComplaints", "Admin")">View Complaint</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="#"><i class="fas fa-bullhorn"></i> <span> Announcement</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("AddAnnouncement", "Admin")">Add Announcement</a></li>
+									<li><a href="@Url.Action("ViewAnnouncements", "Admin")">View Announcement</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="#"><i class="fas fa-chart-bar"></i> <span> Report Management</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("GenerateReport", "Admin")">Generate Report</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="#"><i class="fas fa-user-check"></i> <span> Visitor</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="@Url.Action("AddVisitor", "GateMan")">Add Visitor</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /Sidebar 1-->
+		}
+		else
+		@if (Context.Session.GetString("Role") == "User")
+		{
+			<!-- Sidebar2 -->
+			<div class="sidebar" id="sidebar">
+				<div class="sidebar-inner slimscroll">
+					<div id="sidebar-menu" class="sidebar-menu">
+						<ul>
+							<li class="menu-title">
+								<span>Main Menu</span>
+							</li>
+							<li>
+								<a href="@Url.Action("ViewBills", "User")"><i class="fas fa-file-invoice-dollar"></i> <span> Pay Bills</span> <span class="menu-arrow"></span></a>
+							</li>
+							<li>
+								<a href="@Url.Action("AddComplaint", "User")"><i class="fas fa-exclamation-circle"></i> <span> Add Complaint</span> <span class="menu-arrow"></span></a>
+							</li>
+							<li>
+								<a href="@Url.Action("ViewAnnouncements", "User")"><i class="fas fa-bullhorn"></i> <span> Announcements</span> <span class="menu-arrow"></span></a>
+							</li>
+							<li>
+								<a href="@Url.Action("ViewVisitors", "User")"><i class="fas fa-users"></i> <span> Visitors</span> <span class="menu-arrow"></span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /Sidebar 2-->
+		}
+		<!-- Page Wrapper -->
+		<div class="page-wrapper">
+
+			<div class="content container-fluid">
+				<!-- Page Header -->
+				
+				<!-- /Page Header -->
+
+
+
+
+				<main role="main" class="pb-3">
+					@RenderBody()
+				</main>
+
+
+
+
+
+
+				<!-- /Socail Media Follows -->
+			</div>
+
+			<!-- Footer -->
+			<footer>
+				<p>COPYRIGHT © 2024 SociSphere.</p>
+			</footer>
+			<!-- /Footer -->
+
+		</div>
+		<!-- /Page Wrapper -->
+
+
+
+	</div>
+	<!-- /Main Wrapper -->
+	<!-- jQuery -->
+	<script src="/assets/js/jquery-3.7.1.min.js"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Feather Icon JS -->
+	<script src="/assets/js/feather.min.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Chart JS -->
+	<script src="/assets/plugins/apexchart/apexcharts.min.js"></script>
+	<script src="/assets/plugins/apexchart/chart-data.js"></script>
+
+	<!-- Custom JS -->
+	<script src="/assets/js/script.js"></script>
+	@RenderSection("Scripts", required: false)
+</body>
+
+</html>
+
+
+<script>
+	$(document).ready(function () {
+		function updateNotificationCount() {
+			$.get('/User/GetNotificationCount', function (count) {
+				if (count > 0) {
+					$('#notificationCount').text(count).show();
+				} else {
+					$('#notificationCount').hide();
+				}
+			}).fail(function (jqXHR, textStatus, errorThrown) {
+				console.error("Error fetching notification count:", textStatus, errorThrown);
+			});
+		}
+
+		function loadNotifications() {
+			$.get('/User/GetNotifications', function (data) {
+				$('#notificationContainer').html(data);
+				attachNotificationClickHandlers();
+			}).fail(function (jqXHR, textStatus, errorThrown) {
+				console.error("Error loading notifications:", textStatus, errorThrown);
+				$('#notificationContainer').html('<p class="dropdown-item text-muted">Error loading notifications</p>');
+			});
+		}
+
+		function attachNotificationClickHandlers() {
+			$('.notification-item').on('click', function (e) {
+				e.preventDefault();
+				var notificationType = $(this).data('notification-type');
+				var notificationId = $(this).data('notification-id');
+				if (notificationType === 'announcement') {
+					$.post('/User/MarkAnnouncementAsRead', { id: notificationId }, function () {
+						window.location.href = '/User/ViewAnnouncements';
+					});
+				} else if (notificationType === 'bill') {
+					$.post('/User/MarkBillAsRead', { id: notificationId }, function () {
+						window.location.href = '/User/ViewBills';
+					});
+				}
+			});
+		}
+
+		$('#notificationDropdown').on('show.bs.dropdown', function () {
+			loadNotifications();
+		});
+
+		updateNotificationCount();
+		setInterval(updateNotificationCount, 60000); // Update every minute
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		function updateAdminNotificationCount() {
+			$.get('/Admin/GetNotificationCount', function (count) {
+				if (count > 0) {
+					$('#adminNotificationCount').text(count).show();
+				} else {
+					$('#adminNotificationCount').hide();
+				}
+			}).fail(function (jqXHR, textStatus, errorThrown) {
+				console.error("Error fetching admin notification count:", textStatus, errorThrown);
+			});
+		}
+
+		function loadAdminNotifications() {
+			$.get('/Admin/GetNotifications', function (data) {
+				$('#adminNotificationContainer').html(data);
+				attachAdminNotificationClickHandlers();
+			}).fail(function (jqXHR, textStatus, errorThrown) {
+				console.error("Error loading admin notifications:", textStatus, errorThrown);
+				$('#adminNotificationContainer').html('<p class="dropdown-item text-muted">Error loading notifications</p>');
+			});
+		}
+
+		function attachAdminNotificationClickHandlers() {
+			$('.notification-item').on('click', function (e) {
+				e.preventDefault();
+				var notificationType = $(this).data('notification-type');
+				var notificationId = $(this).data('notification-id');
+				if (notificationType === 'announcement') {
+					window.location.href = '/Admin/ViewAnnouncements';
+				} else if (notificationType === 'complaint') {
+					window.location.href = '/Admin/ViewComplaints';
+				}
+			});
+		}
+
+		$('#adminNotificationDropdown').on('show.bs.dropdown', function () {
+			loadAdminNotifications();
+		});
+
+		updateAdminNotificationCount();
+		setInterval(updateAdminNotificationCount, 60000); // Update every minute
+	});
+</script>
+

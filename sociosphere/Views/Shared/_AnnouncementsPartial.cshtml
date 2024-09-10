@@ -1,0 +1,42 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Tuple<List<announcement>, List<billmanagement>>
+
+@if (Model.Item1.Any() || Model.Item2.Any())
+{
+    @foreach (var announcement in Model.Item1)
+    {
+        <a href="#" class="dropdown-item notification-item" data-notification-type="announcement" data-notification-id="@announcement.Id">
+            <div class="d-flex align-items-center">
+                <div class="notification-icon bg-primary rounded-circle">
+                    <i class="fas fa-bullhorn text-white"></i>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-1">@announcement.Announcement</h6>
+                    <p class="text-muted mb-0"><small>@announcement.AnnounceDate.ToString("MMM dd, yyyy HH:mm")</small></p>
+                </div>
+            </div>
+        </a>
+    }
+    @foreach (var bill in Model.Item2)
+    {
+        <a href="#" class="dropdown-item notification-item" data-notification-type="bill" data-notification-id="@bill.Id">
+            <div class="d-flex align-items-center">
+                <div class="notification-icon bg-success rounded-circle">
+                    <i class="fas fa-file-invoice-dollar text-white"></i>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-1">@bill.Title Bill: ₹@bill.AmountPay for @bill.Month</h6>
+                    <p class="text-muted mb-0"><small>@bill.BillReleaseDt.ToString("MMM dd, yyyy HH:mm")</small></p>
+                </div>
+            </div>
+        </a>
+    }
+}
+else
+{
+    <p class="dropdown-item text-muted">No new notifications</p>
+}

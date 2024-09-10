@@ -1,0 +1,116 @@
+﻿@model sociosphere.Models.userregphoto
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-sm-12">
+                    <div class="page-sub-header">
+                        <h3 class="page-title">Register Flat Owner</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="students.html">Add flat owner</a></li>
+                          
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card comman-shadow">
+                    <div class="card-body">
+                        <div class="register-container">
+                            <h2><i class="fas fa-user-plus"></i> @ViewData["Title"]</h2>
+                            <form asp-action="Register" method="post" enctype="multipart/form-data" class="register-form">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5 class="form-title student-info">Owner Information <span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
+                                            <label asp-for="name"><i class="fas fa-user"></i> Name <span class="login-danger">*</span></label>
+                                            <input asp-for="name" class="form-control" type="text" placeholder="Enter your name">
+                                            <span asp-validation-for="name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
+                                            <label asp-for="email"><i class="fas fa-envelope"></i> Email <span class="login-danger">*</span></label>
+                                            <input asp-for="email" class="form-control" type="text" placeholder="Enter your email">
+                                            <span asp-validation-for="email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
+                                            <label asp-for="password"><i class="fas fa-lock"></i> Password <span class="login-danger">*</span></label>
+                                            <input asp-for="password" class="form-control" type="password" placeholder="Enter your password">
+                                            <span asp-validation-for="password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
+                                            <label asp-for="city"><i class="fas fa-city"></i> City <span class="login-danger">*</span></label>
+                                            <input asp-for="city" class="form-control" type="text" placeholder="Enter your city">
+                                            <span asp-validation-for="city" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group students-up-files">
+                                            <label asp-for="photo" class="control-label"><i class="fas fa-camera"></i> Upload Photo </label>
+                                            <div class="uplod">
+                                                <label class="file-upload image-upbtn mb-0">
+                                                    Choose File <input asp-for="photo" type="file" id="customFile">
+                                                </label>
+                                            </div>
+                                            <span asp-validation-for="photo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="student-submit">
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Register</button>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                @*  .
+                                .
+                                .
+                                .
+                                .
+                                .
+                                . *@ 
+                             
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- /Page Wrapper -->
+
+
+
+<script>
+    // Custom file input
+    document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+        var fileName = e.target.files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+    })
+</script>

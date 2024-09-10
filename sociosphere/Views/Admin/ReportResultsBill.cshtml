@@ -1,0 +1,156 @@
+﻿@model IEnumerable<sociosphere.Models.billmanagement>
+@{
+    ViewData["Title"] = "Report Results";
+}
+|<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<div class="report-results-container">
+    <h2 class="report-results-title"><i class="fas fa-file-alt report-results-icon"></i>Report Results</h2>
+    <form asp-action="ExportReportToCSV" method="post" class="report-results-export-form">
+        <input type="hidden" name="reportType" value="Bill" />
+        <button type="submit" class="report-results-export-btn">
+            <i class="fas fa-file-csv report-results-icon"></i>Export to CSV
+        </button>
+    </form>
+    <div class="report-results-table-container">
+        <table class="report-results-table">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-file-invoice report-results-icon"></i>Bill Title</th>
+                    <th><i class="fas fa-home report-results-icon"></i>Flat Number</th>
+                    <th><i class="fas fa-rupee-sign report-results-icon"></i>Bill Amount</th>
+                    <th><i class="fas fa-calendar-alt report-results-icon"></i>Month</th>
+                    <th><i class="fas fa-calendar-check report-results-icon"></i>Paid Date</th>
+                    <th><i class="fas fa-info-circle report-results-icon"></i>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bill in Model)
+                {
+                    <tr>
+                        <td>@bill.Title</td>
+                        <td>@bill.FlatNo</td>
+                        <td>@bill.AmountPay.ToString("C")</td>
+                        <td>@bill.Month.ToString("MMMM yyyy")</td>
+                        <td>@(bill.BillSbmtDate?.ToString("dd-MM-yyyy") ?? "-")</td>
+                        <td>
+                            <span class="report-results-status @(bill.PaidStatus.ToLower() == "paid" ? "paid" : "unpaid")">
+                                @bill.PaidStatus
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .report-results-container {
+        font-family: 'Roboto', sans-serif;
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .report-results-title {
+        font-family: 'Playfair Display', serif;
+        color: #1a1a1a;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .report-results-export-form {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .report-results-export-btn {
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .report-results-export-btn:hover {
+        background-color: #357abd;
+    }
+
+    .report-results-table-container {
+        overflow-x: auto;
+    }
+
+    .report-results-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .report-results-table th,
+    .report-results-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .report-results-table th {
+        background-color: #f5f5f5;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        letter-spacing: 0.5px;
+    }
+
+    .report-results-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .report-results-table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .report-results-icon {
+        margin-right: 8px;
+        color: #4a90e2;
+    }
+
+    .report-results-status {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: 500;
+    }
+
+    .report-results-status.paid {
+        background-color: #e6f7ed;
+        color: #28a745;
+    }
+
+    .report-results-status.unpaid {
+        background-color: #fbe9e7;
+        color: #dc3545;
+    }
+
+    media (max-width: 768px) {
+        .report-results-table {
+            font-size: 14px;
+        }
+
+        .report-results-table th,
+        .report-results-table td {
+            padding: 10px;
+        }
+    }
+</style>

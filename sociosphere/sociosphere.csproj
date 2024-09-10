@@ -1,0 +1,257 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\script.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\User\InvoiceEmailTemplate.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\addflat.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\script.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\User\InvoiceEmailTemplate.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\fonts\Feather144f.svg" />
+    <None Include="wwwroot\assets\img\arrow.svg" />
+    <None Include="wwwroot\assets\img\icons\award-icon-01.svg" />
+    <None Include="wwwroot\assets\img\icons\award-icon-02.svg" />
+    <None Include="wwwroot\assets\img\icons\award-icon-03.svg" />
+    <None Include="wwwroot\assets\img\icons\award-icon-04.svg" />
+    <None Include="wwwroot\assets\img\icons\buliding-icon.svg" />
+    <None Include="wwwroot\assets\img\icons\dash-icon-01.svg" />
+    <None Include="wwwroot\assets\img\icons\dash-icon-02.svg" />
+    <None Include="wwwroot\assets\img\icons\dash-icon-03.svg" />
+    <None Include="wwwroot\assets\img\icons\dash-icon-04.svg" />
+    <None Include="wwwroot\assets\img\icons\header-icon-01.svg" />
+    <None Include="wwwroot\assets\img\icons\header-icon-04.svg" />
+    <None Include="wwwroot\assets\img\icons\header-icon-05.svg" />
+    <None Include="wwwroot\assets\img\icons\invoices-icon1.svg" />
+    <None Include="wwwroot\assets\img\icons\invoices-icon2.svg" />
+    <None Include="wwwroot\assets\img\icons\invoices-icon3.svg" />
+    <None Include="wwwroot\assets\img\icons\invoices-icon4.svg" />
+    <None Include="wwwroot\assets\img\icons\lesson-icon-01.svg" />
+    <None Include="wwwroot\assets\img\icons\lesson-icon-02.svg" />
+    <None Include="wwwroot\assets\img\icons\lesson-icon-03.svg" />
+    <None Include="wwwroot\assets\img\icons\lesson-icon-04.svg" />
+    <None Include="wwwroot\assets\img\icons\lesson-icon-05.svg" />
+    <None Include="wwwroot\assets\img\icons\lesson-icon-06.svg" />
+    <None Include="wwwroot\assets\img\icons\social-icon-01.svg" />
+    <None Include="wwwroot\assets\img\icons\social-icon-02.svg" />
+    <None Include="wwwroot\assets\img\icons\social-icon-03.svg" />
+    <None Include="wwwroot\assets\img\icons\social-icon-04.svg" />
+    <None Include="wwwroot\assets\img\icons\student-icon-01.svg" />
+    <None Include="wwwroot\assets\img\icons\student-icon-02.svg" />
+    <None Include="wwwroot\assets\img\icons\teacher-icon-01.svg" />
+    <None Include="wwwroot\assets\img\icons\teacher-icon-02.svg" />
+    <None Include="wwwroot\assets\img\icons\teacher-icon-03.svg" />
+    <None Include="wwwroot\assets\js\bootstrap-datetimepicker.min.js" />
+    <None Include="wwwroot\assets\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\assets\js\calander.js" />
+    <None Include="wwwroot\assets\js\circle-progress.min.js" />
+    <None Include="wwwroot\assets\js\ckeditor.js" />
+    <None Include="wwwroot\assets\js\feather.min.js" />
+    <None Include="wwwroot\assets\js\form-validation.js" />
+    <None Include="wwwroot\assets\js\jquery-3.7.1.min.js" />
+    <None Include="wwwroot\assets\js\jquery-ui.min.js" />
+    <None Include="wwwroot\assets\js\jquery.maskedinput.min.js" />
+    <None Include="wwwroot\assets\js\mask.js" />
+    <None Include="wwwroot\assets\js\moment.min.js" />
+    <None Include="wwwroot\assets\js\script.js" />
+    <None Include="wwwroot\assets\plugins\alertify\alertify.min.js" />
+    <None Include="wwwroot\assets\plugins\alertify\custom-alertify.min.js" />
+    <None Include="wwwroot\assets\plugins\apexchart\apexcharts.min.js" />
+    <None Include="wwwroot\assets\plugins\apexchart\chart-data.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-tagsinput\js\bootstrap-tagsinput.js" />
+    <None Include="wwwroot\assets\plugins\c3-chart\c3.min.js" />
+    <None Include="wwwroot\assets\plugins\c3-chart\chart-data.js" />
+    <None Include="wwwroot\assets\plugins\c3-chart\d3.v5.min.js" />
+    <None Include="wwwroot\assets\plugins\chartjs\chart-data.js" />
+    <None Include="wwwroot\assets\plugins\chartjs\chart.min.js" />
+    <None Include="wwwroot\assets\plugins\clipboard\clipboard.min.js" />
+    <None Include="wwwroot\assets\plugins\countup\jquery.counterup.min.js" />
+    <None Include="wwwroot\assets\plugins\countup\jquery.missofis-countdown.js" />
+    <None Include="wwwroot\assets\plugins\countup\jquery.waypoints.min.js" />
+    <None Include="wwwroot\assets\plugins\datatables\datatables.min.js" />
+    <None Include="wwwroot\assets\plugins\datatables\jquery.dataTables.min.js" />
+    <None Include="wwwroot\assets\plugins\daterangepicker\daterangepicker.js" />
+    <None Include="wwwroot\assets\plugins\dragula\js\drag-drop.min.js" />
+    <None Include="wwwroot\assets\plugins\dragula\js\dragula.min.js" />
+    <None Include="wwwroot\assets\plugins\feather\fonts\Feather144f.svg" />
+    <None Include="wwwroot\assets\plugins\flot\chart-data.js" />
+    <None Include="wwwroot\assets\plugins\flot\jquery.flot.fillbetween.js" />
+    <None Include="wwwroot\assets\plugins\flot\jquery.flot.js" />
+    <None Include="wwwroot\assets\plugins\flot\jquery.flot.pie.js" />
+    <None Include="wwwroot\assets\plugins\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\plugins\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\plugins\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\assets\plugins\fontawesome\webfonts\fa-v4compatibility.woff2" />
+    <None Include="wwwroot\assets\plugins\fullcalendar\fullcalendar.min.js" />
+    <None Include="wwwroot\assets\plugins\fullcalendar\jquery.fullcalendar.js" />
+    <None Include="wwwroot\assets\plugins\ion-rangeslider\js\custom-rangeslider.js" />
+    <None Include="wwwroot\assets\plugins\ion-rangeslider\js\ion.rangeSlider.min.js" />
+    <None Include="wwwroot\assets\plugins\lightbox\glightbox.min.js" />
+    <None Include="wwwroot\assets\plugins\lightbox\lightbox.js" />
+    <None Include="wwwroot\assets\plugins\select2\js\select2.min.js" />
+    <None Include="wwwroot\assets\plugins\simple-calendar\jquery.simple-calendar.js" />
+    <None Include="wwwroot\assets\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <None Include="wwwroot\assets\plugins\stickynote\sticky.js" />
+    <None Include="wwwroot\assets\plugins\summernote\font\summernote.woff2" />
+    <None Include="wwwroot\assets\plugins\summernote\summernote-bs4.min.js" />
+    <None Include="wwwroot\assets\plugins\summernote\summernote-lite.min.js" />
+    <None Include="wwwroot\assets\plugins\sweetalert\sweetalert2.all.min.js" />
+    <None Include="wwwroot\assets\plugins\sweetalert\sweetalerts.min.js" />
+    <None Include="wwwroot\assets\plugins\timeline\horizontal-timeline.js" />
+    <None Include="wwwroot\assets\plugins\toastr\toastr.js" />
+    <None Include="wwwroot\assets\plugins\toastr\toastr.min.js" />
+    <None Include="wwwroot\assets\plugins\twitter-bootstrap-wizard\form-wizard.js" />
+    <None Include="wwwroot\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <None Include="wwwroot\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
+    <None Include="wwwroot\fonts\Assistant\Assistant-Bold.woff2" />
+    <None Include="wwwroot\fonts\Assistant\Assistant-ExtraBold.woff2" />
+    <None Include="wwwroot\fonts\Assistant\Assistant-ExtraLight.woff2" />
+    <None Include="wwwroot\fonts\Assistant\Assistant-Light.woff2" />
+    <None Include="wwwroot\fonts\Assistant\Assistant-Regular.woff2" />
+    <None Include="wwwroot\fonts\Assistant\Assistant-SemiBold.woff2" />
+    <None Include="wwwroot\img\Thumbs.db" />
+    <None Include="wwwroot\js\script.js" />
+    <None Include="wwwroot\lib\counterup\counterup.min.js" />
+    <None Include="wwwroot\lib\easing\easing.js" />
+    <None Include="wwwroot\lib\easing\easing.min.js" />
+    <None Include="wwwroot\lib\lightbox\js\lightbox.min.js" />
+    <None Include="wwwroot\lib\owlcarousel\LICENSE" />
+    <None Include="wwwroot\lib\owlcarousel\owl.carousel.js" />
+    <None Include="wwwroot\lib\owlcarousel\owl.carousel.min.js" />
+    <None Include="wwwroot\lib\waypoints\links.php" />
+    <None Include="wwwroot\lib\waypoints\waypoints.min.js" />
+    <None Include="wwwroot\lib\wow\wow.js" />
+    <None Include="wwwroot\lib\wow\wow.min.js" />
+    <None Include="wwwroot\scss\bootstrap.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap-grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap-reboot.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap-utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_floating-labels.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-check.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-control.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-range.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-select.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-text.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_input-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_labels.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_validation.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_clearfix.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_colored-links.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_position.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_ratio.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_stretched-link.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_text-truncation.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_alert.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_border-radius.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_buttons.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_caret.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_clearfix.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_color-scheme.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_container.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_deprecate.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_forms.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_gradients.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_image.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_list-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_lists.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_pagination.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_reset-text.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_resize.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_table-variants.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_transition.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\utilities\_api.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\vendor\_rfs.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_accordion.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_alert.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_badge.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_breadcrumb.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_button-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_buttons.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_card.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_carousel.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_close.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_containers.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_dropdown.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_forms.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_functions.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_helpers.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_images.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_list-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_mixins.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_modal.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_nav.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_navbar.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_offcanvas.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_pagination.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_popover.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_progress.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_reboot.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_root.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_spinners.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_tables.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_toasts.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_tooltip.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_transitions.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_type.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
+    <PackageReference Include="Razorpay" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\img\assets\css\" />
+    <Folder Include="wwwroot\assets\img\assets\img\bg\" />
+    <Folder Include="wwwroot\assets\img\assets\img\icons\" />
+    <Folder Include="wwwroot\assets\img\assets\img\inner-pages\" />
+    <Folder Include="wwwroot\assets\img\assets\img\product\" />
+    <Folder Include="wwwroot\assets\img\assets\js\" />
+    <Folder Include="wwwroot\assets\img\assets\plugins\aos\" />
+    <Folder Include="wwwroot\assets\img\assets\plugins\fontawesome\css\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\css\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\img\bg\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\img\icons\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\img\inner-pages\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\img\product\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\js\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\plugins\aos\" />
+    <Folder Include="wwwroot\assets\plugins\icons\ionic\fonts\assets\plugins\fontawesome\css\" />
+    <Folder Include="wwwroot\invoices\" />
+  </ItemGroup>
+
+</Project>

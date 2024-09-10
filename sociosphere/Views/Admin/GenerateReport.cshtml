@@ -1,0 +1,139 @@
+﻿@model sociosphere.Models.ReportViewModel
+@{
+    ViewData["Title"] = "Generate Report";
+}
+
+<div class="report-generator-container">
+    <div class="report-generator-card">
+        <div class="report-generator-card-body">
+            <h2 class="report-generator-title"><i class="fas fa-chart-line report-generator-icon"></i>Generate Report</h2>
+            <form asp-action="GenerateReport" method="post" class="report-generator-form">
+                <div class="report-generator-row">
+                    <div class="report-generator-col">
+                        <label for="ReportFor" class="report-generator-label"><i class="fas fa-file-alt report-generator-icon"></i>Report For</label>
+                        <select class="report-generator-select" asp-for="ReportFor" asp-items="ViewBag.ReportTypes">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                    <div class="report-generator-col">
+                        <label for="StartDate" class="report-generator-label"><i class="fas fa-calendar-alt report-generator-icon"></i>Start Date</label>
+                        <input type="date" class="report-generator-input" asp-for="StartDate" placeholder="dd-mm-yyyy">
+                    </div>
+                    <div class="report-generator-col">
+                        <label for="EndDate" class="report-generator-label"><i class="fas fa-calendar-check report-generator-icon"></i>End Date</label>
+                        <input type="date" class="report-generator-input" asp-for="EndDate" placeholder="dd-mm-yyyy">
+                    </div>
+                </div>
+                <div class="report-generator-button-container">
+                    <button type="submit" class="report-generator-button"><i class="fas fa-file-export report-generator-icon"></i>Generate Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+
+<style>
+    .report-generator-container {
+        font-family: 'Roboto', sans-serif;
+        max-width: 1000px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .report-generator-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .report-generator-card-body {
+        padding: 40px;
+    }
+
+    .report-generator-title {
+        font-family: 'Playfair Display', serif;
+        color: #1a1a1a;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .report-generator-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .report-generator-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -10px;
+    }
+
+    .report-generator-col {
+        flex: 1;
+        padding: 10px;
+        min-width: 200px;
+    }
+
+    .report-generator-label {
+        display: block;
+        font-weight: 500;
+        color: #4a4a4a;
+        margin-bottom: 8px;
+    }
+
+    .report-generator-select,
+    .report-generator-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+    }
+
+    .report-generator-select:focus,
+    .report-generator-input:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.25);
+    }
+
+    .report-generator-button-container {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .report-generator-button {
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .report-generator-button:hover {
+        background-color: #357abd;
+    }
+
+    .report-generator-icon {
+        margin-right: 8px;
+        color: #4a90e2;
+    }
+
+    media (max-width: 768px) {
+        .report-generator-row {
+            flex-direction: column;
+        }
+    }
+</style>

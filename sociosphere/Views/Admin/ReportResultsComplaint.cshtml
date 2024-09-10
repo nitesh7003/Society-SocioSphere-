@@ -1,0 +1,158 @@
+﻿@model IEnumerable<sociosphere.Models.addcomplaint>
+@{
+    ViewData["Title"] = "Report Results - Complaints";
+}
+<head>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<div class="complaint-report-container">
+    <h2 class="complaint-report-title"><i class="fas fa-clipboard-list complaint-report-icon"></i>Complaint Report Results</h2>
+    <form asp-action="ExportReportToCSV" method="post" class="complaint-report-export-form">
+        <input type="hidden" name="reportType" value="Complaint" />
+        <button type="submit" class="complaint-report-export-btn">
+            <i class="fas fa-file-csv complaint-report-icon"></i>Export to CSV
+        </button>
+    </form>
+    <div class="complaint-report-table-container">
+        <table class="complaint-report-table">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-user complaint-report-icon"></i>Name</th>
+                    <th><i class="fas fa-home complaint-report-icon"></i>Flat Number</th>
+                    <th><i class="fas fa-comment-alt complaint-report-icon"></i>Complaint</th>
+                    <th><i class="fas fa-info-circle complaint-report-icon"></i>Status</th>
+                    <th><i class="fas fa-calendar-plus complaint-report-icon"></i>Raised Date</th>
+                    <th><i class="fas fa-calendar-check complaint-report-icon"></i>Resolved Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var complaint in Model)
+                {
+                    <tr>
+                        <td>@complaint.name</td>
+                        <td>@complaint.flatno</td>
+                        <td>@complaint.WriteComplaint</td>
+                        <td>
+                            <span class="complaint-report-status @(complaint.complaintstatus.ToLower() == "resolved" ? "resolved" : "pending")">
+                                @complaint.complaintstatus
+                            </span>
+                        </td>
+                        <td>@complaint.raisedate.ToString("dd-MM-yyyy")</td>
+                        <td>@(complaint.resolvedate?.ToString("dd-MM-yyyy") ?? "-")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .complaint-report-container {
+        font-family: 'Roboto', sans-serif;
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .complaint-report-title {
+        font-family: 'Playfair Display', serif;
+        color: #1a1a1a;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .complaint-report-export-form {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .complaint-report-export-btn {
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .complaint-report-export-btn:hover {
+        background-color: #357abd;
+    }
+
+    .complaint-report-table-container {
+        overflow-x: auto;
+    }
+
+    .complaint-report-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .complaint-report-table th,
+    .complaint-report-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .complaint-report-table th {
+        background-color: #f5f5f5;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        letter-spacing: 0.5px;
+    }
+
+    .complaint-report-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .complaint-report-table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .complaint-report-icon {
+        margin-right: 8px;
+        color: #4a90e2;
+    }
+
+    .complaint-report-status {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: 500;
+    }
+
+    .complaint-report-status.resolved {
+        background-color: #e6f7ed;
+        color: #28a745;
+    }
+
+    .complaint-report-status.pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    media (max-width: 768px) {
+        .complaint-report-table {
+            font-size: 14px;
+        }
+
+        .complaint-report-table th,
+        .complaint-report-table td {
+            padding: 10px;
+        }
+    }
+</style>

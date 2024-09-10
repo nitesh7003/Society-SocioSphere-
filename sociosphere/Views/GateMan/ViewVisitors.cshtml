@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Visitors</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .visitors-section {
+            padding: 60px 20px;
+        }
+
+        .visitors-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .visitors-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+            .visitors-header h2 {
+                font-family: 'Playfair Display', serif;
+                color: #1a1a1a;
+                font-size: 3em;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+            }
+
+        .visitors-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .visitors-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+            .visitors-table th {
+                background-color: #4a90e2;
+                color: white;
+                padding: 15px;
+                text-align: left;
+                font-weight: 500;
+            }
+
+            .visitors-table td {
+                background-color: #ffffff;
+                padding: 15px;
+            }
+
+            .visitors-table tr {
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+            }
+
+                .visitors-table tr:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+            .btn-danger:hover {
+                background-color: #c0392b;
+            }
+
+        .status-in {
+            color: #27ae60;
+            font-weight: 500;
+        }
+
+        .status-out {
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <section class="visitors-section">
+        <div class="visitors-container">
+            <div class="visitors-header">
+                <h2>Manage Visitors</h2>
+                <p class="visitors-subtitle">Keep track of all visitors in your community</p>
+            </div>
+            <table class="visitors-table">
+                <thead>
+                    <tr>
+                        <th>Visitor Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Reason</th>
+                        <th>In Date Time</th>
+                        <th>Out Date Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var visitor in Model)
+                    {
+                        <tr>
+                            <td>@visitor.VisitorName</td>
+                            <td>@visitor.Phone</td>
+                            <td>@visitor.Address</td>
+                            <td>@visitor.Reason</td>
+                            <td>@visitor.InDateTime</td>
+                            <td>@visitor.OutDateTime</td>
+                            <td class="@(visitor.Status == "In" ? "status-in" : "status-out")">@visitor.Status</td>
+                            <td>
+                                @if (visitor.Status == "In")
+                                {
+                                    <form method="post" asp-action="MarkAsOut" asp-controller="GateMan">
+                                        <input type="hidden" name="id" value="@visitor.Id" />
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-sign-out-alt"></i> Mark Out
+                                        </button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="status-out">Out</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

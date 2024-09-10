@@ -1,0 +1,172 @@
+﻿@model IEnumerable<sociosphere.Models.addcomplaint>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .complaints-section {
+            padding: 60px 20px;
+        }
+
+        .complaints-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .complaints-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .complaints-header h2 {
+                font-family: 'Playfair Display', serif;
+                color: #1a1a1a;
+                font-size: 3em;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+            }
+
+        .complaints-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .complaints-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+            .complaints-table th {
+                background-color: #4a90e2;
+                color: white;
+                font-weight: 500;
+                text-align: left;
+                padding: 15px;
+                font-size: 1.1em;
+            }
+
+            .complaints-table td {
+                background-color: white;
+                padding: 15px;
+            }
+
+            .complaints-table tr {
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+            }
+
+                .complaints-table tr:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+            .btn-success:hover {
+                background-color: #218838;
+            }
+
+        .text-success {
+            color: #28a745;
+        }
+
+        .icon {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <section class="complaints-section">
+        <div class="complaints-container">
+            <div class="complaints-header">
+                <h2>Complaints</h2>
+                <p class="complaints-subtitle">Manage and resolve resident issues</p>
+            </div>
+            <table class="complaints-table">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-user icon"></i>Name</th>
+                        <th><i class="fas fa-home icon"></i>Flat Number</th>
+                        <th><i class="fas fa-comment-alt icon"></i>Complaint</th>
+                        <th><i class="fas fa-info-circle icon"></i>Status</th>
+                        <th><i class="fas fa-calendar-plus icon"></i>Raise Date</th>
+                        <th><i class="fas fa-calendar-check icon"></i>Resolve Date</th>
+                        <th><i class="fas fa-cogs icon"></i>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var complaint in Model)
+                    {
+                        <tr>
+                            <td>@complaint.name</td>
+                            <td>@complaint.flatno</td>
+                            <td>@complaint.WriteComplaint</td>
+                            <td>
+                                @if (complaint.complaintstatus == "Pending")
+                                {
+                                    <span class="text-warning"><i class="fas fa-clock icon"></i>@complaint.complaintstatus</span>
+                                }
+                                else
+                                {
+                                    <span class="text-success"><i class="fas fa-check-circle icon"></i>@complaint.complaintstatus</span>
+                                }
+                            </td>
+                            <td><i class="far fa-calendar-alt icon"></i>@complaint.raisedate.ToShortDateString()</td>
+                            <td>
+                                @if (complaint.resolvedate.HasValue)
+                                {
+                                    <i class="far fa-calendar-check icon"></i>
+
+                                    @complaint.resolvedate.Value.ToShortDateString()
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td>
+                                @if (complaint.complaintstatus == "Pending")
+                                {
+                                    <form asp-action="ResolveComplaint" method="post">
+                                        <input type="hidden" name="id" value="@complaint.Id" />
+                                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon"></i>Resolve</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-success"><i class="fas fa-check-circle icon"></i>Resolved</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

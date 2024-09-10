@@ -1,0 +1,195 @@
+﻿@model sociosphere.Models.addcomplaint
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .complaint-page {
+            display: flex;
+            height: 100vh;
+        }
+
+        .complaint-image {
+            flex: 1;
+            background-image: url('https://img.freepik.com/free-vector/customer-support-flat-illustration_23-2148892786.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+            .image-text h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: 3em;
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+
+            .image-text p {
+                font-size: 1.2em;
+                max-width: 600px;
+                line-height: 1.6;
+            }
+
+        .complaint-form {
+            flex: 1;
+            padding: 60px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-y: auto;
+        }
+
+        .complaint-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .complaint-form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .complaint-form-header h2 {
+                font-family: 'Playfair Display', serif;
+                color: #1a1a1a;
+                font-size: 2.5em;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+            }
+
+        .complaint-form-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4a4a4a;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+            .form-control:focus {
+                border-color: #4a90e2;
+                box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+                outline: none;
+                background-color: #fff;
+            }
+
+        .text-danger {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+
+            .btn-primary:hover {
+                background-color: #357abd;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+        .icon {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="complaint-page">
+        <div class="complaint-image">
+            <div class="image-overlay">
+                <div class="image-text">
+                    <h1>We're Here to Help</h1>
+                    <p>Your satisfaction is our top priority. If you have any concerns or issues, please don't hesitate to let us know. We're committed to addressing your complaints and improving our services.</p>
+                </div>
+            </div>
+        </div>
+        <div class="complaint-form">
+            <div class="complaint-form-container">
+                <div class="complaint-form-header">
+                    <h2><i class="fas fa-comment-alt icon"></i>Submit a Complaint</h2>
+                    <p class="complaint-form-subtitle">We value your feedback and concerns</p>
+                </div>
+                <form asp-action="AddComplaint" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label asp-for="WriteComplaint" class="control-label"><i class="fas fa-pen icon"></i>Write Complaint</label>
+                        <textarea asp-for="WriteComplaint" class="form-control" rows="6" placeholder="Please describe your complaint in detail..."></textarea>
+                        @Html.ValidationMessageFor(model => model.WriteComplaint, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="name" />
+                        <input type="hidden" asp-for="flatno" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane icon"></i>Submit Complaint
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

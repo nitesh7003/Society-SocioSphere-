@@ -1,0 +1,119 @@
+﻿@model IEnumerable<sociosphere.Models.gatemanagement>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitors</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .visitors-section {
+            padding: 60px 20px;
+        }
+
+        .visitors-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .visitors-header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+            .visitors-header h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 2.5em;
+                margin: 0;
+                letter-spacing: 1px;
+            }
+
+        .visitors-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+            .visitors-table th, .visitors-table td {
+                padding: 15px;
+                text-align: left;
+            }
+
+            .visitors-table th {
+                background-color: #f0f4f8;
+                font-weight: 500;
+                color: #4a4a4a;
+                text-transform: uppercase;
+                font-size: 0.9em;
+                letter-spacing: 0.5px;
+            }
+
+            .visitors-table tr:nth-child(even) {
+                background-color: #f9fafc;
+            }
+
+            .visitors-table tr:hover {
+                background-color: #e6f0ff;
+                transition: background-color 0.3s ease;
+            }
+
+        .icon {
+            margin-right: 8px;
+            color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+    <section class="visitors-section">
+        <div class="visitors-container">
+            <div class="visitors-header">
+                <h2><i class="fas fa-users icon"></i>Visitors</h2>
+            </div>
+            <table class="visitors-table">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-user icon"></i>Visitor Name</th>
+                        <th><i class="fas fa-phone icon"></i>Phone</th>
+                        <th><i class="fas fa-map-marker-alt icon"></i>Address</th>
+                        <th><i class="fas fa-question-circle icon"></i>Reason</th>
+                        <th><i class="fas fa-sign-in-alt icon"></i>In Date Time</th>
+                        <th><i class="fas fa-sign-out-alt icon"></i>Out Date Time</th>
+                        <th><i class="fas fa-info-circle icon"></i>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var visitor in Model)
+                    {
+                        <tr>
+                            <td>@visitor.VisitorName</td>
+                            <td>@visitor.Phone</td>
+                            <td>@visitor.Address</td>
+                            <td>@visitor.Reason</td>
+                            <td>@visitor.InDateTime</td>
+                            <td>@visitor.OutDateTime?.ToString()</td>
+                            <td>@visitor.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>
